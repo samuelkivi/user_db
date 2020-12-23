@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import {
+  BrowserRouter as Router,
+  Switch, Route, Link
+} from "react-router-dom";
+import axios from 'axios';
 import "./Login.css";
 
 export default function Login() {
@@ -13,6 +18,25 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
+    console.log(username, password, "toimii");
+
+    axios.post('http://localhost:3001/auth', {
+      username: username,
+      password: password
+    })
+    .then((response) => {
+      console.log(response);
+    }, (error) => {
+      console.log(error);
+    });
+
+    // axios.post??
+    //if true router
+    //else nothing
   }
 
   return (
@@ -35,7 +59,7 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <Button block size="lg" type="submit" disabled={!validateForm()} onClick={handleClick}>
           Login
         </Button>
       </Form>
