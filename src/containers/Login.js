@@ -6,12 +6,18 @@ import {
   Switch, Route, Link
 } from "react-router-dom";
 import axios from 'axios';
+import { createHashHistory } from 'history'
 import "./Login.css";
+
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  //Browser history
+  const history = createHashHistory()
+
+  //Checks that there is username and password
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
@@ -24,17 +30,27 @@ export default function Login() {
     e.preventDefault();
     console.log(username, password, "toimii");
 
+    //Sends post to server.js
     axios.post('http://localhost:3001/auth', {
       username: username,
       password: password
     })
-    .then((response) => {
-      console.log(response);
-    }, (error) => {
-      console.log(error);
-    });
+      //Response from the server
+      .then((response) => {
+        console.log(response);
+        if(response == "ookoo",username,password){
+          console.log("You in");
+          history.push("/Home");
+        }
+        else{
+          console.log("Wrong username or password");
+        }
+      }, (error) => {
+        console.log(error);
+      });
 
-  
+      
+
     //if true router
     //else nothing
   }

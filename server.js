@@ -14,20 +14,20 @@ app.use(session({
 	resave: true,
 	saveUninitialized: true
 }));
-app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+	res.send('Hello World!')
 })
 
-app.post('/auth', function(request, response) {
+app.post('/auth', function (request, response) {
 	var username = request.body.username;
-  var password = request.body.password;
-  console.log(username, password);
+	var password = request.body.password;
+	console.log(username, password);
 	if (username && password) {
-    response.send('ookoo', username, password);
-    response.end();
+		response.send('ookoo', username, password);
+		response.end();
 	} else {
 		response.send('Please enter Username and Password!');
 		response.end();
@@ -36,5 +36,5 @@ app.post('/auth', function(request, response) {
 
 
 app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`)
+	console.log(`Server listening at http://localhost:${port}`)
 })
