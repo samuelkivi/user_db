@@ -26,7 +26,7 @@ app.post('/auth', function (request, response) {
 	var password = request.body.password;
 	console.log(username, password);
 	if (username && password) {
-		response.send('ookoo', username, password);
+		response.send('ookoo',username,password);
 		response.end();
 	} else {
 		response.send('Please enter Username and Password!');

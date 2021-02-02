@@ -1,5 +1,9 @@
-import Login from "./containers/Login";
+import React from 'react';
+import { Router, hashHistory as history } from 'react-router';
 
-<Route exact path="/login">
-  <Login />
-</Route>
+import Routes from './Routes';
+
+ReactDOM.render(
+  <Router routes={routes} history={history} />,
+  document.getElementById('your-app')
+);
