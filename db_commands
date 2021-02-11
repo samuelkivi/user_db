@@ -1,0 +1,16 @@
+//create users table
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    pword VARCHAR(255) NOT NULL
+)  
+
+//insert values into users
+INSERT INTO users (username, pword)
+VALUES ('test2', 'test2');
+
+//show users table
+select * from users
+
+//deletes all from users
+DELETE FROM users
