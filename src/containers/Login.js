@@ -8,6 +8,8 @@ import "./Login.css";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [count, setCount] = useState(0);
+  const [users, setUsers] = useState([]);
 
   //Checks that there is username and password
   function validateForm() {
@@ -16,6 +18,62 @@ export default function Login() {
 
   function handleSubmit(event) {
     event.preventDefault();
+    console.log(users);
+  }
+
+  function handleClick(event) {
+    event.preventDefault();
+    console.log(users);
+  }
+
+
+  function handleDatabase(event) {
+    event.preventDefault();
+    getUsers();
+  }
+
+  //Request users from servers
+  const getUsers = () => {
+    axios.post('http://localhost:3001/getUsers', {
+    })
+      //Response from the server
+      .then((response) => {
+        console.log(response.data);
+        setUsers(response.data)
+      }, (error) => {
+        console.log(error);
+      });
+  }
+
+  const Database = () => {
+    console.log(count);
+    var usernames = [];
+    for (var i = 0; i < users.length; i++) {
+      console.log(users[i].username);
+      usernames.push(users[i].username);
+  }
+  console.log(usernames);
+    if (count % 2 === 1) {
+      
+      return (
+        <Form>
+          <Button onClick={() => setCount(count + 1)}>
+            Hide database
+        </Button>
+          {usernames}
+        </Form>
+      )
+    }
+    else {
+      return (
+        <Form>
+          <Button onClick={() => setCount(count + 1)}>
+            Show database
+        </Button>
+          <p>Tyhjää</p>
+        </Form>
+      )
+    }
   }
 
   function handleSave(e) {
@@ -31,19 +89,15 @@ export default function Login() {
       //Response from the server
       .then((response) => {
         console.log(response);
-        if(response.data == "ookoo"){
+        if (response.data === "ookoo") {
           console.log("Username and password saved");
         }
-        else{
+        else {
           console.log("Username and password not saved");
         }
       }, (error) => {
         console.log(error);
       });
-  }
-
-  function handleShow(e) {
-    console.log("handleShow")
   }
 
   return (
@@ -66,13 +120,20 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()} onClick={handleSave}>
+        <Button type="submit" disabled={!validateForm()} onClick={handleSave}>
           Save to the database
         </Button>
-        <Button block size="lg" type="submit" onClick={handleShow}>
-          Show database
-        </Button>
+
       </Form>
+      <Button onClick={handleDatabase}>
+        handleDatabase
+      </Button>
+      <Button onClick={handleClick}>
+        Show
+      </Button>
+      <Database />
     </div>
   );
 }
+
+//<Database />

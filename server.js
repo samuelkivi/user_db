@@ -49,6 +49,16 @@ app.post('/save', function (request, response) {
 	}
 });
 
+app.post('/getUsers', function (request, response) {
+		pool.query("SELECT * FROM users", function (err, result, fields) {
+			if (err) throw err;
+			console.log(result);
+			response.send(result);
+			response.end();
+		  });
+});
+
+
 app.listen(port, () => {
 	console.log(`Server listening at http://localhost:${port}`)
 })
