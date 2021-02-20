@@ -21,12 +21,7 @@ export default function Login() {
     console.log(users);
   }
 
-  function handleClick(event) {
-    event.preventDefault();
-    console.log(users);
-  }
-
-
+  //Get users from database button
   function handleDatabase(event) {
     event.preventDefault();
     getUsers();
@@ -45,22 +40,24 @@ export default function Login() {
       });
   }
 
+  //Shows and hides database, adds usernames to a list
   const Database = () => {
     console.log(count);
     var usernames = [];
     for (var i = 0; i < users.length; i++) {
       console.log(users[i].username);
       usernames.push(users[i].username);
-  }
-  console.log(usernames);
+    }
+    console.log(usernames);
     if (count % 2 === 1) {
-      
       return (
         <Form>
           <Button onClick={() => setCount(count + 1)}>
             Hide database
         </Button>
-          {usernames}
+          {usernames.map(item => (
+            <li key={item}>{item}</li>
+          ))}
         </Form>
       )
     }
@@ -70,16 +67,15 @@ export default function Login() {
           <Button onClick={() => setCount(count + 1)}>
             Show database
         </Button>
-          <p>Tyhjää</p>
         </Form>
       )
     }
   }
 
+  //Saves users to a database
   function handleSave(e) {
     console.log("handleSave")
     e.preventDefault();
-    console.log(username, password, "toimii");
 
     //Sends post to server.js
     axios.post('http://localhost:3001/save', {
@@ -98,6 +94,9 @@ export default function Login() {
       }, (error) => {
         console.log(error);
       });
+
+      setUsername("");
+      setPassword("");
   }
 
   return (
@@ -123,17 +122,11 @@ export default function Login() {
         <Button type="submit" disabled={!validateForm()} onClick={handleSave}>
           Save to the database
         </Button>
-
+        <Button onClick={handleDatabase}>
+          Get users from database
+      </Button>
       </Form>
-      <Button onClick={handleDatabase}>
-        handleDatabase
-      </Button>
-      <Button onClick={handleClick}>
-        Show
-      </Button>
       <Database />
     </div>
   );
 }
-
-//<Database />

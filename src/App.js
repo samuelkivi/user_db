@@ -8,7 +8,7 @@ const email = "samuel.kivi98@gmail.com"
 
 const App = () => (
     <div className='app'>
-        <h1>React User Database Demo</h1>
+        <h1>React User Database</h1>
         <Navigation />
         <Main />
     </div>
@@ -20,7 +20,7 @@ const Navigation = () => (
             <li><NavLink to='/'>Home</NavLink></li>
             <li><NavLink to='/about'>About</NavLink></li>
             <li><NavLink to='/contact'>Contact</NavLink></li>
-            <li><NavLink to='/Login'>Login</NavLink></li>
+            <li><NavLink to='/Login'>Insert</NavLink></li>
         </ul>
     </nav>
 );
@@ -28,7 +28,7 @@ const Navigation = () => (
 const About = () => (
     <div className='about'>
         <h1>About This Page</h1>
-        <p>This is a simple user database. You can insert names and passwords to the database with Login</p>
+        <p>This is a simple user database. You can insert names and passwords to the database with Insert</p>
         <p></p>
     </div>
 );

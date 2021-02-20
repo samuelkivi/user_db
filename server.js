@@ -1,17 +1,17 @@
 var session = require('express-session');
 var bodyParser = require('body-parser');
 var path = require('path');
-var cors = require('cors')
-const express = require('express')
-const app = express()
-const port = 3001
+var cors = require('cors');
+const express = require('express');
+const app = express();
+const port = 3001;
 var mysql = require('mysql');
 
 var pool = mysql.createPool({
 	connectionLimit: 10,
 	host: 'localhost',
 	user: 'root',
-	password: 'rootpassword',
+	password: 'secret', 
 	database: 'user_database'
 });
 
@@ -29,7 +29,6 @@ app.use(bodyParser.json());
 app.get('/', (req, res) => {
 	res.send('Hello World!')
 })
-
 
 app.post('/save', function (request, response) {
 	var username = request.body.username;
